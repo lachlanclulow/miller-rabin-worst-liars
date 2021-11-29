@@ -4,6 +4,7 @@ from math import floor
 
 def miller_rabin(n, a):
     """
+    Modified from here: https://rosettacode.org/wiki/Miller%E2%80%93Rabin_primality_test#Python
     Miller-Rabin primality test.
  
     A return value of False means n is certainly not prime. A return value of
@@ -54,16 +55,17 @@ def get_bad_witnesses(star_witnesses, target):
             print(f'{p_candidate}/{target} processed - {floor(p_candidate/target*100)}%')
     return bad_witnesses
 
+def get_count(elem):
+    return elem[1]['count']
 
 if __name__ == '__main__':
     bad_witnesses = {}
     star_witnesses = [2, 3]
     target = 10000
 
-    for k, v in get_bad_witnesses(star_witnesses, target).items():
-        print(f'{k}: {v}')
+    liar_list = [(k, v) for k,v in get_bad_witnesses(star_witnesses, target).items()]
+    print(liar_list)
+    liar_list.sort(key=get_count)
 
-
-    
-
-
+    for liar in liar_list:
+        print(liar)
